@@ -1,0 +1,21 @@
+CAPI=2:
+name: justint:cdc:afifo:1.0.0
+description: Asynchronous FIFO
+
+filesets:
+  rtl:
+    files: [rtl/afifo.sv]
+    file_type: systemVerilogSource
+  tb:
+
+targets:
+  default: &default
+    filesets:
+      - rtl
+    toplevel: afifo
+
+  formal:
+    <<: *default
+    default_tool:
+    filesets_append:
+    toplevel:
