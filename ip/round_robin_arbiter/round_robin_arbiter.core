@@ -1,17 +1,18 @@
 CAPI=2:
-name: justint:cdc:afifo:1.0.0
-description: Asynchronous FIFO
+name: justint:arbiter:round_robin:1.0.0
+description: Round Robin Arbiter
 
 filesets:
   rtl:
-    files: [rtl/afifo.sv]
+    files: [rtl/round_robin_arbiter.sv]
     file_type: systemVerilogSource
-
+    depend:
+      - ">=justint:arbiter:fixed:1.0"
 targets:
   default: &default
     filesets:
       - rtl
-    toplevel: afifo
+    toplevel: round_robin_arbiter
 
   #formal:
   #  <<: *default

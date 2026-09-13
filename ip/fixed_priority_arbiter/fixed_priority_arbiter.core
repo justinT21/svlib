@@ -1,17 +1,17 @@
 CAPI=2:
-name: justint:cdc:afifo:1.0.0
-description: Asynchronous FIFO
+name: justint:arbiter:fixed:1.0.0
+description: Fixed Priority Arbiter
 
 filesets:
   rtl:
-    files: [rtl/afifo.sv]
+    files: [rtl/fixed_priority_arbiter.sv]
     file_type: systemVerilogSource
 
 targets:
   default: &default
     filesets:
       - rtl
-    toplevel: afifo
+    toplevel: fixed_priority_arbiter
 
   #formal:
   #  <<: *default
