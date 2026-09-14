@@ -1,0 +1,13 @@
+CAPI=2:
+name: justint:shared:includes:1.0.0
+description: Global headers and macros
+
+filesets:
+  headers:
+    files:
+      - formal_macros.svh: { is_include_file: true }
+    file_type: systemVerilogSource
+
+targets:
+  default:
+    filesets: [headers]

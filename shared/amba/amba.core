@@ -1,0 +1,23 @@
+CAPI=2:
+name: justint:shared:amba:1.0.0
+description: AXI4, AXI4-Lite, and AXI-Stream definitions
+
+filesets:
+  rtl:
+    files:
+      - rtl/axi_pkg.sv
+      - rtl/axi_pkg.svh: { is_include_file: true }
+    file_type: systemVerilogSource
+  vip:
+    depend:
+      - ">=justint:shared:includes:1.0.0"
+    files:
+      - dv/axi_protocol_checker.sv
+    file_type: systemVerilogSource
+
+targets:
+  default:
+    filesets: [rtl]
+
+  export_vip:
+    filesets: [vip]
