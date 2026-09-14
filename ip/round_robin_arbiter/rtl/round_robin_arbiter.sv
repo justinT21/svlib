@@ -11,7 +11,9 @@ module round_robin_arbiter #(
   `include "formal_macros.svh"
   `ASSERT_INIT(CheckNGreaterZero_A, N > 0)
 
-  logic [N-1:0] grant_masked, grant_unmasked, masked_req, mask, raw_grant;
+  logic [N-1:0]
+      grant_masked, grant_unmasked, masked_req, mask, raw_grant, locked_grant, final_raw_grant;
+  logic is_locked;
 
   assign masked_req = req_i & mask;
 
@@ -35,7 +37,8 @@ module round_robin_arbiter #(
 
   assign raw_grant = (masked_req != '0) ? grant_masked : grant_unmasked;
   assign valid_o = |req_i;
-  assign gnt_o = ready_i ? raw_grant : '0;
+  assign gnt_o = ready_i ? final_raw_grant : '0;
+  assign final_raw_grant = is_locked ? locked_grant : raw_grant;
 
   always_ff @(posedge clk_i or negedge rst_ni) begin : mask_update
     if (!rst_ni) begin
@@ -44,8 +47,20 @@ module round_robin_arbiter #(
       // only update on handshake
       if (valid_o && ready_i) begin
         // creates a mask of 1s above next_grant
-        mask <= ~((raw_grant - 1'b1) | raw_grant);
+        mask <= ~((final_raw_grant - 1'b1) | final_raw_grant);
       end
+    end
+  end
+
+  always_ff @(posedge clk_i or negedge rst_ni) begin : grant_lock_logic
+    if (!rst_ni) begin
+      locked_grant <= '0;
+      is_locked    <= 1'b0;
+    end else if (valid_o && ready_i) begin
+      is_locked <= 1'b0;
+    end else if (valid_o && !ready_i && !is_locked) begin
+      locked_grant <= raw_grant;
+      is_locked    <= 1'b1;
     end
   end
 
@@ -65,7 +80,7 @@ module round_robin_arbiter #(
                         && |(req_i & ~($past(gnt_o) ^ ($past(gnt_o) - 1))) |-> gnt_o > $past(gnt_o))
 
   `ASSUME(ReqStaysHighUntilGnt_M, |req_i && !ready_i |=> (req_i & $past(req_i)) == $past(req_i))
-  `ASSERT(LockGnt_A, |req_i && !ready_i |=> raw_grant == $past(raw_grant))
+  `ASSERT(LockGnt_A, |req_i && !ready_i |=> final_raw_grant == $past(final_raw_grant))
 
 `ifdef FORMAL
   // symbolic variables

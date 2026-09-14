@@ -1,6 +1,8 @@
 module fixed_priority_arbiter #(
     parameter integer N = 8
 ) (
+    input clk_i,
+    input rst_ni,
     input ready_i,
     input [N-1:0] req_i,
     output logic valid_o,

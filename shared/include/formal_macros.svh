@@ -22,13 +22,13 @@
 // Standard Definitions
 
 `define ASSERT(__name, __prop, __clk = `ASSERT_DEFAULT_CLK, __rst = `ASSERT_DEFAULT_RST) \
-  __name: assert property (@(posedge __clk) disable iff (__rst !== '0) (__prop))
+  __name: assert property (@(posedge __clk) disable iff (__rst !== '0) (__prop));
 
 `define ASSUME(__name, __prop, __clk = `ASSERT_DEFAULT_CLK, __rst = `ASSERT_DEFAULT_RST) \
-  __name: assume property (@(posedge __clk) disable iff (__rst !== '0) (__prop))
+  __name: assume property (@(posedge __clk) disable iff (__rst !== '0) (__prop));
 
 `define COVER(__name, __prop, __clk = `ASSERT_DEFAULT_CLK, __rst = `ASSERT_DEFAULT_RST) \
-  __name: cover property (@(posedge __clk) disable iff (__rst !== '0) (__prop))
+  __name: cover property (@(posedge __clk) disable iff (__rst !== '0) (__prop));
 
 `define ASSERT_KNOWN(__name, __sig, __clk = `ASSERT_DEFAULT_CLK, __rst = `ASSERT_DEFAULT_RST) \
   `ASSERT(__name, !$isunknown(__sig), __clk, __rst)
@@ -44,10 +44,17 @@
                          __rst = `ASSERT_DEFAULT_RST) \
   `ASSERT(__name, (__cond) |=> $stable(__sig), __clk, __rst)
 
+
+`ifdef FORMAL
+`define ASSERT_INIT(__name, __prop) \
+  if (!(__prop)) $fatal(2, "Fatal static assertion [%s]: (%s) is not true.",         \
+                        (__name), (__prop)); \
+`else
 `define ASSERT_INIT(__name, __prop) \
   initial begin \
     __name: assert (__prop) else $fatal(1, "Assertion failed: %m"); \
   end
+`endif
 
 `define ASSERT_COMB(__name, __prop) \
   always_comb begin \
