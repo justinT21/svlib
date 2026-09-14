@@ -14,9 +14,3 @@ targets:
     filesets:
       - rtl
     toplevel: fixed_priority_arbiter
-
-  #formal:
-  #  <<: *default
-  #  default_tool:
-  #  filesets_append:
-  #  toplevel:

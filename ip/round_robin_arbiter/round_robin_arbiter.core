@@ -15,8 +15,9 @@ targets:
       - rtl
     toplevel: round_robin_arbiter
 
-  #formal:
-  #  <<: *default
-  #  default_tool:
-  #  filesets_append:
-  #  toplevel:
+  formal:
+    <<: *default
+    flow: sim
+    flow_options:
+      tool: icarus
+      iverilog_options: ["-DFORMAL"]
