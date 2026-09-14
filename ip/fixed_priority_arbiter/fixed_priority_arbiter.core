@@ -6,6 +6,8 @@ filesets:
   rtl:
     files: [rtl/fixed_priority_arbiter.sv]
     file_type: systemVerilogSource
+    depend:
+      - ">=justint:shared:includes:1.0.0"
 
 targets:
   default: &default
