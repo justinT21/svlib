@@ -1,0 +1,20 @@
+CAPI=2:
+name: justint:ddr:input:1.0.0
+description: IDDR Generic
+
+filesets:
+  generic:
+    files:
+      - rtl/iddr_generic.sv
+    file_type: systemVerilogSource
+
+  fpga:
+    files:
+      - rtl/iddr_fpga.sv
+    file_type: systemVerilogSource
+
+targets:
+  default:
+    filesets:
+      - "tool_vivado ? (fpga)"
+      - "!tool_vivado ? (generic)"
