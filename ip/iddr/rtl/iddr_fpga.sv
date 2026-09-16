@@ -3,9 +3,9 @@ module iddr #(
 ) (
     input clk_i,
     input rst_ni,
-    input [WIDTH-1:0] q_i,
-    output logic [WIDTH-1:0] d1_o,
-    output logic [WIDTH-1:0] d2_o
+    input [WIDTH-1:0] d_i,
+    output logic [WIDTH-1:0] q1_o,
+    output logic [WIDTH-1:0] q2_o
 );
   for (genvar i = 0; i < WIDTH; i++) begin : g_iddr
     IDDR #(
@@ -14,11 +14,11 @@ module iddr #(
         .INIT_Q2(1'b0),
         .SRTYPE("ASYNC")
     ) IDDR_inst (
-        .Q1(d1_o[i]),
-        .Q2(d2_o[i]),
+        .Q1(q1_o[i]),
+        .Q2(q2_o[i]),
         .C (clk_i),
         .CE(1'b1),
-        .D (q_i[i]),
+        .D (d_i[i]),
         .R (!rst_ni),
         .S (1'b0)
     );

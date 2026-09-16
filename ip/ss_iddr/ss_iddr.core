@@ -1,0 +1,24 @@
+CAPI=2:
+name: justint:ddr:ss_input:1.0.0
+description: Source Synchronous IDDR Generic
+
+filesets:
+  generic:
+    files:
+      - rtl/ss_iddr_generic.sv
+    file_type: systemVerilogSource
+    depends:
+      - ">=justint:ddr:input:1.0.0"
+
+  fpga:
+    files:
+      - rtl/ss_iddr_fpga.sv
+    file_type: systemVerilogSource
+    depends:
+      - ">=justint:ddr:input:1.0.0"
+
+targets:
+  default:
+    filesets:
+      - "tool_vivado ? (fpga)"
+      - "!tool_vivado ? (generic)"
