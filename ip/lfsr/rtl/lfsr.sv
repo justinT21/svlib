@@ -14,7 +14,7 @@ module lfsr #(
   function automatic mask_table_t lfsr_mask_gen();
     full_mask_table_t local_table = '{default: '0};
 
-    for (int i = 0; i < LFSR_WIDTH; i++) begin : mask_init
+    for (int i = 0; i < DATA_WIDTH + LFSR_WIDTH; i++) begin : mask_init
       local_table[i][i] = 1'b1;
     end
 

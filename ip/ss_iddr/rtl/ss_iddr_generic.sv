@@ -1,4 +1,4 @@
-module iddr #(
+module ss_iddr #(
     parameter int WIDTH = 8
 ) (
     input ext_clk_i,
