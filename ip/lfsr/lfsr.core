@@ -1,0 +1,15 @@
+CAPI=2:
+name: justint:lfsr:galois:1.0.0
+description: Galois LFSR
+
+filesets:
+  rtl:
+    files:
+      - rtl/lfsr.sv
+    file_type: systemVerilogSource
+
+targets:
+  default:
+    filesets:
+      - rtl
+    toplevel: lfsr
