@@ -22,3 +22,4 @@ targets:
     filesets:
       - "tool_vivado ? (fpga)"
       - "!tool_vivado ? (generic)"
+    toplevel: ss_iddr

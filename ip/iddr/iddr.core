@@ -18,3 +18,4 @@ targets:
     filesets:
       - "tool_vivado ? (fpga)"
       - "!tool_vivado ? (generic)"
+    toplevel: iddr
