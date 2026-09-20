@@ -20,6 +20,8 @@ module round_robin_arbiter #(
   fixed_priority_arbiter #(
       .N(N)
   ) masked_arb (
+      .clk_i  (clk_i),
+      .rst_ni (rst_ni),
       .ready_i(1'b1),
       .req_i  (masked_req),
       .valid_o(),
@@ -29,6 +31,8 @@ module round_robin_arbiter #(
   fixed_priority_arbiter #(
       .N(N)
   ) unmasked_arb (
+      .clk_i  (clk_i),
+      .rst_ni (rst_ni),
       .ready_i(1'b1),
       .req_i  (req_i),
       .valid_o(),

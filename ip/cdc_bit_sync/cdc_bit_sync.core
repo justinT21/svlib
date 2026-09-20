@@ -1,0 +1,21 @@
+CAPI=2:
+name: justint:cdc:bit_sync:1.0.0
+description: One bit Synchronizer
+
+filesets:
+  generic:
+    files: [rtl/cdc_bit_sync.sv]
+    file_type: systemVerilogSource
+    depend:
+      - ">=justint:shared:includes:1.0.0"
+
+  fpga:
+    files: [rtl/cdc_bit_sync.sv]
+    file_type: systemVerilogSource
+
+targets:
+  default: &default
+    filesets:
+      - "tool_vivado ? (fpga)"
+      - "!tool_vivado ? (generic)"
+    toplevel: cdc_bit_sync

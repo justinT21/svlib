@@ -8,7 +8,7 @@ module oddr #(
     output logic [WIDTH-1:0] q_o
 );
 
-  logic [WIDTH-1:0] d1, d2;
+  logic [WIDTH-1:0] d1, d2, d2_neg;
 
   always_ff @(posedge clk_i or negedge rst_ni) begin : save_input
     if (!rst_ni) begin
@@ -20,5 +20,11 @@ module oddr #(
     end
   end
 
-  assign q_o = clk_i ? d1 : d2;
+  // re-register
+  always_ff @(negedge clk_i or negedge rst_ni) begin
+    if (!rst_ni) d2_neg <= '0;
+    else d2_neg <= d2;
+  end
+
+  assign q_o = clk_i ? d1 : d2_neg;
 endmodule

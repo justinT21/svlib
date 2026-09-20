@@ -1,0 +1,21 @@
+CAPI=2:
+name: justint:cdc:async_rst:1.0.0
+description: Asynchronous Reset Synchronizer
+
+filesets:
+  generic:
+    files: [rtl/cdc_async_rst_generic.sv]
+    file_type: systemVerilogSource
+    depend:
+      - ">=justint:shared:includes:1.0.0"
+
+  fpga:
+    files: [rtl/cdc_async_rst_fpga.sv]
+    file_type: systemVerilogSource
+
+targets:
+  default: &default
+    filesets:
+      - "tool_vivado ? (fpga)"
+      - "!tool_vivado ? (generic)"
+    toplevel: cdc_async_rst
