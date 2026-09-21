@@ -3,7 +3,9 @@ module cdc_gray_sync #(
     parameter int WIDTH  = 8
 ) (
     input src_clk_i,
+    input src_rst_ni,
     input dest_clk_i,
+    input dest_rst_ni,
     input [WIDTH-1:0] src_counter_i,
     output logic [WIDTH-1:0] dest_counter_o
 );

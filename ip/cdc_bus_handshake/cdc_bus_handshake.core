@@ -1,16 +1,17 @@
 CAPI=2:
-name: justint:cdc:gray_sync:1.0.0
-description: Gray Code Synchronizer
+name: justint:cdc:bus_handshake:1.0.0
+description: Bus Handshake Synchronizer
 
 filesets:
   generic:
-    files: [rtl/cdc_gray_sync_generic.sv]
+    files: [rtl/cdc_bus_handshake_generic.sv]
     file_type: systemVerilogSource
     depend:
       - ">=justint:shared:includes:1.0.0"
+      - ">=justint:cdc:bit_sync:1.0.0"
 
   fpga:
-    files: [rtl/cdc_gray_sync_fpga.sv]
+    files: [rtl/cdc_bus_handshake_fpga.sv]
     file_type: systemVerilogSource
 
 targets:
@@ -18,4 +19,4 @@ targets:
     filesets:
       - "tool_vivado ? (fpga)"
       - "!tool_vivado ? (generic)"
-    toplevel: cdc_gray_sync
+    toplevel: cdc_bus_handshake

@@ -7,7 +7,7 @@ filesets:
     files: [rtl/round_robin_arbiter.sv]
     file_type: systemVerilogSource
     depend:
-      - ">=justint:arbiter:fixed:1.0"
+      - ">=justint:arbiter:fixed:1.0.0"
       - ">=justint:shared:includes:1.0.0"
 targets:
   default: &default

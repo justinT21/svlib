@@ -7,14 +7,14 @@ filesets:
     files:
       - rtl/ss_iddr_generic.sv
     file_type: systemVerilogSource
-    depends:
+    depend:
       - ">=justint:ddr:input:1.0.0"
 
   fpga:
     files:
       - rtl/ss_iddr_fpga.sv
     file_type: systemVerilogSource
-    depends:
+    depend:
       - ">=justint:ddr:input:1.0.0"
 
 targets:

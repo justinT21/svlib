@@ -6,6 +6,10 @@ filesets:
   rtl:
     files: [rtl/cdc_freq_counter.sv]
     file_type: systemVerilogSource
+    depend:
+      - ">=justint:cdc:async_rst:1.0.0"
+      - ">=justint:cdc:gray_sync:1.0.0"
+      - ">=justint:shared:includes:1.0.0"
 
 targets:
   default: &default

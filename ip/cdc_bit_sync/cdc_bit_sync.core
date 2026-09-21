@@ -4,13 +4,13 @@ description: One bit Synchronizer
 
 filesets:
   generic:
-    files: [rtl/cdc_bit_sync.sv]
+    files: [rtl/cdc_bit_sync_generic.sv]
     file_type: systemVerilogSource
     depend:
       - ">=justint:shared:includes:1.0.0"
 
   fpga:
-    files: [rtl/cdc_bit_sync.sv]
+    files: [rtl/cdc_bit_sync_fpga.sv]
     file_type: systemVerilogSource
 
 targets:
