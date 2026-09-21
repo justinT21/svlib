@@ -1,7 +1,7 @@
 module cdc_bus_handshake #(
-    parameter int STAGES = 2,
-    parameter int WIDTH = 8,
-    parameter int DEST_EXT_HSK = 1
+    parameter int unsigned STAGES = 2,
+    parameter int unsigned WIDTH = 8,
+    parameter int unsigned DEST_EXT_HSK = 1
 ) (
     input src_clk_i,
     input src_rst_ni,

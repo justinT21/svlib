@@ -1,6 +1,6 @@
 module cdc_gray_sync #(
-    parameter int STAGES = 2,
-    parameter int WIDTH  = 8
+    parameter int unsigned STAGES = 2,
+    parameter int unsigned WIDTH  = 8
 ) (
     input src_clk_i,
     input src_rst_ni,
@@ -18,7 +18,7 @@ module cdc_gray_sync #(
 
   always_ff @(posedge src_clk_i or negedge src_rst_ni) begin
     if (!src_rst_ni) begin
-      gray_src <= {'0};
+      gray_src <= '0;
     end else begin
       gray_src <= src_counter_i ^ (src_counter_i >> 1);
     end
@@ -26,7 +26,7 @@ module cdc_gray_sync #(
 
   always_ff @(posedge dest_clk_i or negedge dest_rst_ni) begin
     if (!dest_rst_ni) begin
-      sync_pipe <= {'0};
+      sync_pipe <= '0;
     end else begin
       sync_pipe <= {sync_pipe[STAGES-2:0], gray_src};
     end

@@ -1,5 +1,5 @@
 module cdc_async_rst #(
-    parameter int STAGES = 2
+    parameter int unsigned STAGES = 2
 ) (
     input clk_i,
     input rst_ni,

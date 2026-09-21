@@ -1,5 +1,5 @@
 module cdc_bit_sync #(
-    parameter int   STAGES = 2,
+    parameter int unsigned STAGES = 2,
     parameter logic INIT   = 1'b0
 ) (
     input clk_i,

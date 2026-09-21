@@ -1,5 +1,5 @@
 module fixed_priority_arbiter #(
-    parameter integer N = 8
+    parameter int unsigned N = 8
 ) (
     input clk_i,
     input rst_ni,

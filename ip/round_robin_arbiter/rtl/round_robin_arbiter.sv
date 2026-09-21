@@ -1,5 +1,5 @@
 module round_robin_arbiter #(
-    parameter integer N = 8
+    parameter int unsigned N = 8
 ) (
     input clk_i,
     input rst_ni,
@@ -11,6 +11,11 @@ module round_robin_arbiter #(
   `include "formal_macros.svh"
   `ASSERT_INIT(CheckNGreaterZero_A, N > 0)
 
+  // We have a masked priority arbiter that finds any requests above, if there
+  // are none then we use the unmasked arbiter which finds one starting from
+  // the bottom
+  // Note: an optimization for large amounts of data and requests is to make
+  // a binary tree of muxes that pass the data at the same time as choosing
   logic [N-1:0]
       grant_masked, grant_unmasked, masked_req, mask, raw_grant, locked_grant, final_raw_grant;
   logic is_locked;
@@ -109,7 +114,7 @@ module round_robin_arbiter #(
           ReadyStable && ReqStable && ready_i && req_i[k] |-> s_eventually (gnt_o[k]))
 
   for (genvar i = 1; i <= N; i++) begin : gen_fairness
-    integer gnt_cnt;
+    int unsigned gnt_cnt;
     `ASSERT(Fairness_A,
             ReqStable && ReadyStable && ready_i && req_i[k] && $countones(
                 req_i

@@ -1,6 +1,6 @@
 module cdc_gray_sync #(
-    parameter int STAGES = 2,
-    parameter int WIDTH  = 8
+    parameter int unsigned STAGES = 2,
+    parameter int unsigned WIDTH  = 8
 ) (
     input src_clk_i,
     input src_rst_ni,

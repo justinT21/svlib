@@ -1,8 +1,8 @@
 `timescale 1ns/1ps
 
 module afifo #(
-    parameter int DATA_WIDTH   = 32,
-    parameter int BUFFER_WIDTH = 10
+    parameter int unsigned DATA_WIDTH   = 32,
+    parameter int unsigned BUFFER_WIDTH = 10
 ) (
     input wclk_i,
     input wrst_ni,
@@ -20,12 +20,12 @@ module afifo #(
   logic [BUFFER_WIDTH:0] rgray, rbin;
   logic [BUFFER_WIDTH:0] wgray, wbin;
 
-  wire [BUFFER_WIDTH-1:0] waddr, raddr;
+  logic [BUFFER_WIDTH-1:0] waddr, raddr;
 
   logic [DATA_WIDTH-1:0] mem[1<<BUFFER_WIDTH];
 
-  wire [BUFFER_WIDTH:0] wbin_next, wgray_next;
-  wire [BUFFER_WIDTH:0] rbin_next, rgray_next;
+  logic [BUFFER_WIDTH:0] wbin_next, wgray_next;
+  logic [BUFFER_WIDTH:0] rbin_next, rgray_next;
 
   logic wfull_next, rempty_next;
 

@@ -1,7 +1,7 @@
 module cdc_freq_counter #(
-    parameter int WINDOW_CYCLES = 8,
-    parameter int COUNTER_WIDTH = 12,
-    parameter int STAGES = 2
+    parameter int unsigned WINDOW_CYCLES = 8,
+    parameter int unsigned COUNTER_WIDTH = 12,
+    parameter int unsigned STAGES = 2
 ) (
     input ref_clk_i,
     input ref_rst_ni,
@@ -10,7 +10,8 @@ module cdc_freq_counter #(
 );
   `include "formal_macros.svh"
   `ASSERT_INIT(CheckWindowCyclesPower2_A, $onehot(WINDOW_CYCLES))
-  localparam int WindowBits = $clog2(WINDOW_CYCLES);
+  `ASSERT_INIT(CheckCounterWidthFits_A, COUNTER_WIDTH >= $clog2(WINDOW_CYCLES + STAGES + 1))
+  localparam int unsigned WindowBits = $clog2(WINDOW_CYCLES);
 
   logic target_rst_n;
   logic [COUNTER_WIDTH-1:0]

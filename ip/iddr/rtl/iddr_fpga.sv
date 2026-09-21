@@ -1,5 +1,5 @@
 module iddr #(
-    parameter int WIDTH = 8
+    parameter int unsigned WIDTH = 8
 ) (
     input clk_i,
     input rst_ni,

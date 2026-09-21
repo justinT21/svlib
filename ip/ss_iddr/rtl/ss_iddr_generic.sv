@@ -1,5 +1,5 @@
 module ss_iddr #(
-    parameter int WIDTH = 8
+    parameter int unsigned WIDTH = 8
 ) (
     input ext_clk_i,
     input rst_ni,

@@ -1,8 +1,8 @@
 `timescale 1ns / 1ps
 
 module uart_writer #(
-    parameter int INPUT_CLK_SPEED = 11_520_000,  // Hz, 11.52 MHz
-    parameter int UART_BAUD_RATE = 115_200  // Hz
+    parameter int unsigned INPUT_CLK_SPEED = 11_520_000,  // Hz, 11.52 MHz
+    parameter int unsigned UART_BAUD_RATE = 115_200  // Hz
 ) (
     input clk_i,
     input rst_ni,
@@ -11,7 +11,7 @@ module uart_writer #(
     output logic busy_o,
     output logic uart_tx_o
 );
-  localparam int ClkDiv = INPUT_CLK_SPEED / UART_BAUD_RATE;
+  localparam int unsigned ClkDiv = INPUT_CLK_SPEED / UART_BAUD_RATE;
 
   logic [$clog2(ClkDiv)-1:0] div_cnt;
   logic [9:0] shift_reg;  // {stop bit, data[7:0], start bit}, lsb first
